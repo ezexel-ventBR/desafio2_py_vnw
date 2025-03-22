@@ -17,7 +17,7 @@ def init_db():
                     titulo TEXT NOT NULL,
                     categoria TEXT NOT NULL,
                     autor TEXT NOT NULL,
-                    imagem_url TEXT NOT NULL
+                    image_url TEXT NOT NULL
                 )
             """
         )
@@ -31,15 +31,15 @@ def doar():
     titulo = dados.get("titulo")
     categoria = dados.get("categoria")
     autor = dados.get("autor")
-    imagem_url = dados.get("imagem_url")
+    image_url = dados.get("image_url")
 
-    if not titulo or not categoria or not autor or not imagem_url:
+    if not titulo or not categoria or not autor or not image_url:
         return jsonify({"erro": "Todos os campos são obrigatórios"}), 400
 
     with sqlite3.connect("database.db") as conn:
         conn.execute(f"""
-        INSERT INTO LIVROS (titulo, categoria, autor, imagem_url)
-        VALUES ("{titulo}","{categoria}","{autor}","{imagem_url}")
+        INSERT INTO LIVROS (titulo, categoria, autor, image_url)
+        VALUES ("{titulo}","{categoria}","{autor}","{image_url}")
         """)
     
     conn.commit()
@@ -59,7 +59,7 @@ def listar_livros():
                 "titulo": item[1],
                 "categoria": item[2],
                 "autor": item[3],
-                "imagem_url": item[4]
+                "image_url": item[4]
             }
             livros_formatados.append(dicionario)
 
